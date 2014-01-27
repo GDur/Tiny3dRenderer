@@ -11,6 +11,7 @@ part 'data_structure/camera.dart';
 part 'data_structure/mesh.dart';
 
 part 'objectFiles/WavefrontObjectFile.dart';
+part 'objectFiles/WaveFrontObjFileParser.dart';
 part 'objectFiles/ship1.dart';
 part 'objectFiles/ship2.dart';
 part 'objectFiles/ship3.dart';

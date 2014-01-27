@@ -1,7 +1,5 @@
 part of t3dr;
 
-
-
 void main() {
 
   CanvasElement canvas = querySelector("#canvas");
@@ -9,7 +7,7 @@ void main() {
 
   var drawables = new List<Model3D>();
 
-
+  var t = new WaveFrontObjFileParser(ship1.data);
   Model3D imported1 = new Model3D(
       new Transform()
         ..setPos(new Vector3(3000.0, 0.0, 10000.0))
@@ -40,7 +38,7 @@ void main() {
   Model3D imported6 = new Model3D(
       new Transform()
         ..setPos(new Vector3(-3200.0, 0.0, 10000.0))
-        ..setScale(new Vector3(3.5, -3.5, 3.5))
+        ..setScale(new Vector3(4.0, -4.0, 4.0))
         ..setRotation(new Vector3(0.3, 0.0 , .0))
     , ship6.getMesh()
     , ORANGE
@@ -56,24 +54,38 @@ void main() {
   gc.font="15px Consolas";
 
   GameLoopHtml gameLoop = new GameLoopHtml(canvas);
-  gameLoop.onUpdate = ((gameLoop) {
+  DateTime now;
+  double dt = 0.0;
+
+  int tmpTime;
+  gameLoop.onUpdate = ((GameLoopHtml gameLoop) {
+    int start = new DateTime.now().millisecondsSinceEpoch;
+    dt = (start - tmpTime).toDouble() / 1000.0;
+
+    if(dt < gameLoop.dt)
+      return;
+
+    tmpTime = start;
 
     Vector3 old1 = imported1.transform.getRotation;
     old1.setValues(old1.x , old1.y += 3.14*2/10*gameLoop.dt , old1.z);
 
     Vector3 old2 = imported2.transform.getRotation;
-    old2.setValues(old2.x , old2.y -= 3.14*2/10*gameLoop.dt , old2.z);
+    old2.setValues(old2.x , old2.y -= 3.14*2/10*dt , old2.z);
 
     Vector3 old3 = imported3.transform.getRotation;
-    old3.setValues(old3.x , old3.y += 3.14*2/10*gameLoop.dt , old3.z);
+    old3.setValues(old3.x , old3.y += 3.14*2/10*dt , old3.z);
 
     Vector3 old6 = imported6.transform.getRotation;
-    old6.setValues(old6.x , old6.y -= 3.14*2/10*gameLoop.dt , old6.z);
+    old6.setValues(old6.x , old6.y -= 3.14*2/10*dt , old6.z);
 
     imported1.transform.setRotation(old1);
     imported2.transform.setRotation(old2);
     imported3.transform.setRotation(old3);
     imported6.transform.setRotation(old6);
+
+//    int end = new DateTime.now().millisecondsSinceEpoch;
+//    dt = ((end - start) + 15).toDouble() / 1000.0;
   });
 
 
@@ -85,7 +97,7 @@ void main() {
 
     gc.fillText('Time: ${gameLoop.gameTime}sec',10,20);
     gc.fillText('FrameCount: ${gameLoop.frame} ',10,40);
-    gc.fillText('dt: ${gameLoop.dt}',10,60);
+    gc.fillText('dt: ${dt}',10,60);
     gc.fillText('fps average: ${gameLoop.frame/gameLoop.gameTime}',10,80);
 
     // draw
@@ -130,5 +142,6 @@ void main() {
       });
     });
   });
+  tmpTime = new DateTime.now().millisecondsSinceEpoch;
   gameLoop.start();
 }

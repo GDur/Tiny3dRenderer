@@ -4,8 +4,10 @@ class WavefrontObjectFile{
   String data;
   WavefrontObjectFile(this.data);
 
-  Mesh getMesh(){
+  Mesh getMesh() {
+    var now = new DateTime.now();
 //    http://en.wikipedia.org/wiki/Wavefront_.obj_file
+
     Mesh tmpMesh = new Mesh();
 
     List<String> lines = data.split("\n");
@@ -38,14 +40,14 @@ class WavefrontObjectFile{
           // Face Definitions
           // f 13/21/1 14/22/2 15/23/3 16/24/4
           // f v1/vt1/vn1 v2/vt2/vn2 v3/vt3/vn3
-          if(segments.length == 5){
+          if(segments.length == 5) {
             int a = int.parse(segments[1].split("/")[0]);
             int b = int.parse(segments[2].split("/")[0]);
             int c = int.parse(segments[3].split("/")[0]);
             int d = int.parse(segments[4].split("/")[0]);
             tmpMesh.addQuad(a - 1, b - 1, c - 1, d - 1);
 //            tmpMesh.addTriangle(a - 1, c - 1, d - 1);
-          }else if(segments.length == 4){
+          } else if(segments.length == 4) {
             int a = int.parse(segments[1].split("/")[0]);
             int b = int.parse(segments[2].split("/")[0]);
             int c = int.parse(segments[3].split("/")[0]);
@@ -54,6 +56,7 @@ class WavefrontObjectFile{
           break;
       }
     });
+    print((new DateTime.now().difference(now)));
     return tmpMesh;
   }
 }
