@@ -2,7 +2,7 @@ Tiny3dRenderer
 ==============
 
 A project to teach myself 3D stuff. Written in Google's Dart
-
+Demo: https://dl.dropboxusercontent.com/u/8938703/web/tiny3drenderer.html
 
 1. Download the Dart editor (which is based on eclipse)
 2. checkout this repository in some folder
