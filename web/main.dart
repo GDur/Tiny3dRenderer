@@ -44,10 +44,20 @@ void main() {
     , ORANGE
   );
 
+  Model3D cube = new Model3D(
+      new Transform()
+        ..setPos(new Vector3(-900.0, 0.0, 5000.0))
+        ..setScale(new Vector3(200.0, -200.0, 200.0))
+        ..setRotation(new Vector3(0.2, -0.2 , .0))
+    , cube_test.getMesh()
+    , ORANGE
+  );
+
   drawables.add(imported1);
   drawables.add(imported2);
   drawables.add(imported3);
   drawables.add(imported6);
+//  drawables.add(cube);
 
   var cam  = new Camera(canvas.width  / 2, canvas.height  / 2);
 
@@ -57,6 +67,8 @@ void main() {
   DateTime now;
   double dt = 0.0;
 
+  gc.fillStyle = GREY;
+  gc.fillRect(0, 0, canvas.width, canvas.height);
   int tmpTime;
   gameLoop.onUpdate = ((GameLoopHtml gameLoop) {
     int start = new DateTime.now().millisecondsSinceEpoch;
@@ -79,10 +91,14 @@ void main() {
     Vector3 old6 = imported6.transform.getRotation;
     old6.setValues(old6.x , old6.y -= 3.14*2/10*dt , old6.z);
 
+    Vector3 old7 = cube.transform.getRotation;
+    old7.setValues(old7.x -= 3.14*2/10*dt, old7.y -= 3.14*2/10*dt , old7.z -= 3.14*2/10*dt);
+
     imported1.transform.setRotation(old1);
     imported2.transform.setRotation(old2);
     imported3.transform.setRotation(old3);
     imported6.transform.setRotation(old6);
+//    cube.transform.setRotation(old7);
 
 //    int end = new DateTime.now().millisecondsSinceEpoch;
 //    dt = ((end - start) + 15).toDouble() / 1000.0;
@@ -91,6 +107,7 @@ void main() {
 
   gameLoop.onRender = ((gameLoop) {
     gc.fillStyle = GREY;
+    gc.fillStyle = "rgba(33, 33, 33, 0.1)";
     gc.fillRect(0, 0, canvas.width, canvas.height);
 
     gc.fillStyle = GREEN;

@@ -16,6 +16,7 @@ part 'objectFiles/ship1.dart';
 part 'objectFiles/ship2.dart';
 part 'objectFiles/ship3.dart';
 part 'objectFiles/ship6.dart';
+part 'objectFiles/cube_test.dart';
 
 part 'main.dart';
 
