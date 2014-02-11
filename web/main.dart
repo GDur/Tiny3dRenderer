@@ -107,15 +107,15 @@ void main() {
 
   gameLoop.onRender = ((gameLoop) {
     gc.fillStyle = GREY;
-    gc.fillStyle = "rgba(33, 33, 33, 0.1)";
+    gc.fillStyle = "rgba(33, 33, 33, 1.0)";
     gc.fillRect(0, 0, canvas.width, canvas.height);
 
     gc.fillStyle = GREEN;
 
-    gc.fillText('Time: ${gameLoop.gameTime}sec',10,20);
+    gc.fillText('Time: ${gameLoop.gameTime.round()}sec',10,20);
     gc.fillText('FrameCount: ${gameLoop.frame} ',10,40);
     gc.fillText('dt: ${dt}',10,60);
-    gc.fillText('fps average: ${gameLoop.frame/gameLoop.gameTime}',10,80);
+    gc.fillText('fps average: ${(gameLoop.frame/gameLoop.gameTime).round()}',10,80);
 
     // draw
     drawables.forEach((Model3D d) {
