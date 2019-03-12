@@ -87,7 +87,7 @@ void main() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   int tmpTime;
 
-  const oneSec = const Duration(milliseconds: 60);
+  const oneSec = const Duration(milliseconds: 10);
   new Timer.periodic(oneSec, (Timer t) {
     int start = new DateTime.now().millisecondsSinceEpoch;
     dt = (start - tmpTime).toDouble() / 1000.0;
@@ -122,19 +122,24 @@ void main() {
 //    dt = ((end - start) + 15).toDouble() / 1000.0;
   });
 
+  var frameCount = 1;
+  num oldDeltaTime = 0;
   update(num delta) {
     ctx.fillStyle = GREY;
     ctx.fillStyle = "rgba(33, 33, 33, 1.0)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.fillStyle = GREEN;
+    num passedSeconds = (delta / 1000).round() + 1;
+    ctx.fillText('Time: ${passedSeconds} sec', 10, 20);
+    ctx.fillText('FrameCount: ${frameCount} ', 10, 40);
+    ctx.fillText('dt: ${(delta - oldDeltaTime).round()}', 10, 60);
+    ctx.fillText(
+        'fps average: ${(frameCount / passedSeconds).round()}', 10, 80);
 
-    // ctx.fillText('Time: ${gameLoop.gameTime.round()}sec', 10, 20);
-    // ctx.fillText('FrameCount: ${gameLoop.frame} ', 10, 40);
-    // ctx.fillText('dt: ${dt}', 10, 60);
-    // ctx.fillText(
-    //     'fps average: ${(gameLoop.frame / gameLoop.gameTime).round()}', 10, 80);
+    oldDeltaTime = delta;
 
+    frameCount++;
     // draw
     drawables.forEach((Model3D d) {
       ctx.strokeStyle = d.color;
