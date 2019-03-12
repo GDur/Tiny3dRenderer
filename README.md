@@ -1,5 +1,6 @@
 This is a tiny 3d renderer written in Dart.
-The main purpose of this project is to show hoow the 3D to 2D projection algorithm works in practice.
+
+The main purpose of this project is to show how the 3D to 2D projection algorithm works in practice.
 
 Install
 =======
