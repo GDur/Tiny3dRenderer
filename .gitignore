@@ -1,18 +1,11 @@
-// https://github.com/github/gitignore/blob/master/Dart.gitignore
-// Don’t commit the following files and directories created by pub and 
-dart2js
-**/packages
-*.js_
-*.js.deps
-*.js.map
+# Files and directories created by pub
+.dart_tool/
+.packages
+# Remove the following pattern if you wish to check in your lock file
+pubspec.lock
 
-// Include when developing application packages
-// pubspec.lock 
+# Conventional directory for build outputs
+build/
 
-// Avoid committing generated JavaScript files
-*.dart.js
-
-
-// https://github.com/github/gitignore/blob/master/Global/DartEditor.gitignore
-.project
-.buildlog
+# Directory created by dartdoc
+doc/api/
