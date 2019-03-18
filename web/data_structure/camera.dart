@@ -1,23 +1,24 @@
 part of t3dr;
 
 class Camera {
-  var dist = 1000.0;
-  var x , y;
+  double dist = 10.0;
+  double x, y, z = 0;
 
   Camera(this.x, this.y);
 
-  getMatrix(double z){
-    return new Matrix4( 1.0,0.0,0.0,0.0,
-                        0.0,1.0,0.0,0.0,
-                        0.0,0.0,1.0,1.0 / z,
-                        0.0,0.0,0.0,0.0);
-  }
-
   getX(Vector4 v) {
-    return x + dist * v.x  / v.z;
+    var d = dist + this.z;
+    if (d > 1) {
+      return v.x / d + this.x;
+    }
+    return 0;
   }
 
   getY(Vector4 v) {
-    return y + dist * v.y  / v.z;
+    var d = dist + this.z;
+    if (d > 1) {
+      return v.y / d + this.y;
+    }
+    return 0;
   }
 }

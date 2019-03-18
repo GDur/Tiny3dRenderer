@@ -1,6 +1,6 @@
 part of t3dr;
 
-class WavefrontObjectFile{
+class WavefrontObjectFile {
   String data;
   WavefrontObjectFile(this.data);
 
@@ -12,19 +12,15 @@ class WavefrontObjectFile{
 
     List<String> lines = data.split("\n");
     lines.forEach((String line) {
-
       List<String> segments = line.split(" ");
-      switch(segments[0]){
+      switch (segments[0]) {
         case "#":
-//      # this is a comment
+          //  # this is a comment
           break;
         case "v":
-//      List of Vertices, with (x,y,z[,w]) coordinates, w is optional and defaults to 1.0.
-          tmpMesh.addVertex(new Vector3(
-              double.parse(segments[1]),
-              double.parse(segments[2]),
-              double.parse(segments[3]))
-          );
+          // List of Vertices, with (x,y,z[,w]) coordinates, w is optional and defaults to 1.0.
+          tmpMesh.addVertex(new Vector3(double.parse(segments[1]),
+              double.parse(segments[2]), double.parse(segments[3])));
           break;
         case "vt":
           // Texture coordinates, in (u ,v [,w]) coordinates,
@@ -40,14 +36,14 @@ class WavefrontObjectFile{
           // Face Definitions
           // f 13/21/1 14/22/2 15/23/3 16/24/4
           // f v1/vt1/vn1 v2/vt2/vn2 v3/vt3/vn3
-          if(segments.length == 5) {
+          if (segments.length == 5) {
             int a = int.parse(segments[1].split("/")[0]);
             int b = int.parse(segments[2].split("/")[0]);
             int c = int.parse(segments[3].split("/")[0]);
             int d = int.parse(segments[4].split("/")[0]);
             tmpMesh.addQuad(a - 1, b - 1, c - 1, d - 1);
-//            tmpMesh.addTriangle(a - 1, c - 1, d - 1);
-          } else if(segments.length == 4) {
+            //  tmpMesh.addTriangle(a - 1, c - 1, d - 1);
+          } else if (segments.length == 4) {
             int a = int.parse(segments[1].split("/")[0]);
             int b = int.parse(segments[2].split("/")[0]);
             int c = int.parse(segments[3].split("/")[0]);
